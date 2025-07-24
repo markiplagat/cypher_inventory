@@ -13,4 +13,11 @@
       <%= button_to "-", decrease_quantity_product_path(product), method: :patch, form: { data: { turbo_stream: true } }, class: "btn btn-sm btn-outline-danger" %>
     </div>
   </td>
+  <td>
+    <% if product.image.attached? %>
+      <%= image_tag product.image.variant(resize_to_limit: [80, 80]), class: "img-thumbnail" %>
+    <% else %>
+      <span class="text-muted">No image</span>
+    <% end %>
+ </td>
 <% end %>

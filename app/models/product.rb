@@ -5,6 +5,8 @@ class Product < ApplicationRecord
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :quantity, numericality: { greater_than_or_equal_to: 0 }
 
+  has_one_attached :image
+
   def self.ransackable_attributes(auth_object = nil)
     ["name", "description", "price", "quantity"]
   end

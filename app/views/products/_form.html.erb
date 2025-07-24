@@ -32,6 +32,11 @@
     </div>
 
   <div class="mb-3">
+    <%= form.label :image, class: "form-label" %>
+    <%= form.file_field :image, direct_upload: true, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
     <% if product.persisted? %>
       <div class="float-end">
         <%= link_to 'Destroy', product, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
