@@ -1,8 +1,48 @@
-# See https://github.com/andyw8/setup-rails for more information
-
 name: Verify
+
 on: [push]
 
 jobs:
-  verify:
-    uses: andyw8/setup-rails/.github/workflows/verify.yml@v1
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:13
+        ports: ['5432:5432']
+        env:
+          POSTGRES_DB: myapp_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/myapp_test
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+
+      - name: Set up database
+        run: |
+          cp config/database.yml.github config/database.yml
+          bin/rails db:create
+          bin/rails db:schema:load
+
+      - name: Run tests
+        run: |
+          bin/rails test
