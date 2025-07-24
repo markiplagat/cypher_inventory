@@ -30,22 +30,7 @@
 
     <tbody>
       <% @products.each do |product| %>
-        <%= content_tag :tr, id: dom_id(product), class: dom_class(product) do %>
-          
-            <td><%= link_to product.name, product %></td>
-          
-
-                      <td><%= product.description %></td>
-                      <td><%= product.price %></td>
-                      <td>
-                          <%= product.quantity %>
-                          <% if product.quantity <= 10 %>
-                            <span class="badge bg-danger ms-2">Low Stock</span>
-                          <% end %>
-                      </td>
-          
-          
-        <% end %>
+        <%= render partial: "product", locals: { product: product } %>
       <% end %>
     </tbody>
   </table>

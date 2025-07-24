@@ -36,14 +36,13 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1 or /products/1.json
   def update
-    respond_to do |format|
-      if @product.update(product_params)
-        format.html { redirect_to @product, notice: "Product was successfully updated." }
-        format.json { render :show, status: :ok, location: @product }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+    if @product.update(product_params)
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
       end
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

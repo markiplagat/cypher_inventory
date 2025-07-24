@@ -1,22 +1,11 @@
-<div id="<%= dom_id product %>">
-  <p>
-    <strong>Name:</strong>
-    <%= product.name %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= product.description %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= product.price %>
-  </p>
-
-  <p>
-    <strong>Quantity:</strong>
+<%= content_tag :tr, id: dom_id(product), class: dom_class(product) do %>
+  <td><%= link_to product.name, product %></td>
+  <td><%= product.description %></td>
+  <td><%= product.price %></td>
+  <td>
     <%= product.quantity %>
-  </p>
-
-</div>
+    <% if product.quantity <= 10 %>
+      <span class="badge bg-danger ms-2">Low Stock</span>
+    <% end %>
+  </td>
+<% end %>
