@@ -85,3 +85,5 @@ gem "whenever", require: false
 gem "responders", github: "heartcombo/responders", branch: "main"
 gem 'ransack'
 gem 'image_processing', '~> 1.2'
+gem 'rails_admin', '~> 3.0'
+gem "sassc-rails"

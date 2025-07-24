@@ -71,6 +71,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (7.1.5.1)
       activesupport (= 7.1.5.1)
+    activemodel-serializers-xml (1.0.3)
+      activemodel (>= 5.0.0.a)
+      activesupport (>= 5.0.0.a)
+      builder (~> 3.1)
     activerecord (7.1.5.1)
       activemodel (= 7.1.5.1)
       activesupport (= 7.1.5.1)
@@ -119,6 +123,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
+    csv (3.3.5)
     date (3.4.1)
     debug (1.11.0)
       irb (~> 1.10)
@@ -166,6 +171,18 @@ GEM
     json (2.13.1)
     jwt (3.1.2)
       base64
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     launchy (2.5.2)
       addressable (~> 2.8)
     letter_opener (1.9.0)
@@ -193,6 +210,7 @@ GEM
     multi_xml (0.7.2)
       bigdecimal (~> 3.1)
     mutex_m (0.3.0)
+    nested_form (0.3.2)
     net-http (0.6.0)
       uri
     net-imap (0.5.9)
@@ -309,6 +327,13 @@ GEM
     rails-html-sanitizer (1.6.2)
       loofah (~> 2.21)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
+    rails_admin (3.3.0)
+      activemodel-serializers-xml (>= 1.0)
+      csv
+      kaminari (>= 0.14, < 2.0)
+      nested_form (~> 0.3)
+      rails (>= 6.0, < 9)
+      turbo-rails (>= 1.0, < 3)
     railties (7.1.5.1)
       actionpack (= 7.1.5.1)
       activesupport (= 7.1.5.1)
@@ -333,6 +358,14 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     rubyzip (2.4.1)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     securerandom (0.4.1)
     selenium-webdriver (4.34.0)
       base64 (~> 0.2)
@@ -361,6 +394,7 @@ GEM
       railties (>= 6.0.0)
     stringio (3.1.7)
     thor (1.4.0)
+    tilt (2.2.0)
     timeout (0.4.3)
     turbo-rails (2.0.16)
       actionpack (>= 7.1.0)
@@ -422,8 +456,10 @@ DEPENDENCIES
   puma (>= 5.0)
   pundit (~> 2.1)
   rails (~> 7.1.5, >= 7.1.5.1)
+  rails_admin (~> 3.0)
   ransack
   responders!
+  sassc-rails
   selenium-webdriver
   sidekiq (~> 6.2)
   sitemap_generator (~> 6.1)
