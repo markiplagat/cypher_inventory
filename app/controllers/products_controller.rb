@@ -66,6 +66,11 @@ class ProductsController < ApplicationController
 
   def decrease_quantity
     @product.decrement!(:quantity)
+
+    if @product.quantity == 10
+      StockMailer.low_stock_alert(@product).deliver_now!
+    end
+
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to products_path }
