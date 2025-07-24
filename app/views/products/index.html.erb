@@ -14,6 +14,15 @@
 </div>
 
 <div class="table-responsive">
+  <%= search_form_for @q, url: products_path, method: :get, html: { class: 'row g-2 mb-3' } do |f| %>
+    <div class="col-auto">
+      <%= f.label :name_or_description_cont, "Search", class: 'form-label' %>
+      <%= f.search_field :name_or_description_cont, class: 'form-control', placeholder: "Name or Description" %>
+    </div>
+    <div class="col-auto align-self-end">
+      <%= f.submit "Search", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
