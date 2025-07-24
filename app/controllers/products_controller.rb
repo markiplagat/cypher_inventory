@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  require 'csv'
   before_action :set_product, only: [:show, :edit, :update, :destroy, :increase_quantity, :decrease_quantity]
 
   # GET /products or /products.json
@@ -75,6 +76,17 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to products_path }
+    end
+  end
+
+  def export
+    @products = Product.all
+
+    respond_to do |format|
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=products-#{Date.today}.csv"
+        headers['Content-Type'] = 'text/csv'
+      end
     end
   end
 

@@ -7,9 +7,12 @@
   </div>
 
   <div class="col-sm-6 text-end">
-  <%= link_to new_product_path, class: 'btn btn-primary' do %>
-    Add New Product
-  <% end %>
+    <%= link_to export_products_path(format: :csv), class: "btn btn-success ms-2" do %>
+      Export CSV
+    <% end %>
+    <%= link_to new_product_path, class: 'btn btn-primary' do %>
+      Add New Product
+    <% end %>
   </div>
 </div>
 

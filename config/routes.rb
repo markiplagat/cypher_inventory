@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     patch :increase_quantity
     patch :decrease_quantity
   end
+  collection do
+    get :export
+  end
 end
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'

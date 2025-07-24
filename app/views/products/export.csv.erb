@@ -1,0 +1,6 @@
+<%= CSV.generate do |csv| %>
+  <% csv << ["ID", "Name", "Description", "Price", "Quantity"] %>
+  <% @products.each do |product| %>
+    <% csv << [product.id, product.name, product.description, product.price, product.quantity] %>
+  <% end %>
+<% end %>
