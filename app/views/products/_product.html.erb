@@ -7,5 +7,10 @@
     <% if product.quantity <= 10 %>
       <span class="badge bg-danger ms-2">Low Stock</span>
     <% end %>
+
+    <div class="btn-group ms-2" role="group">
+      <%= button_to "+", increase_quantity_product_path(product), method: :patch, form: { data: { turbo_stream: true } }, class: "btn btn-sm btn-outline-success" %>
+      <%= button_to "-", decrease_quantity_product_path(product), method: :patch, form: { data: { turbo_stream: true } }, class: "btn btn-sm btn-outline-danger" %>
+    </div>
   </td>
 <% end %>

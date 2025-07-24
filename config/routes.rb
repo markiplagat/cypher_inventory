@@ -1,7 +1,12 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :products
+  resources :products do
+  member do
+    patch :increase_quantity
+    patch :decrease_quantity
+  end
+end
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
 authenticate :user, lambda { |u| u.admin? } do
