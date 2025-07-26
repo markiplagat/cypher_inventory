@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: cypher-inventory
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cypher_inventory_db
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+
+databases:
+  - name: cypher_inventory_db
+    databaseName: cypher_inventory_production
+    user: cypher_inventory_user
