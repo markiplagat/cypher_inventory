@@ -72,7 +72,22 @@ Seeds two users:
 
 🙋 user@test.local -> Password: cypher12
 
-### 4. Start the Server
+### 4. Install libvips 
+```
+sudo apt install libvips -y
+```
+
+### 5. Install Redis
+```
+sudo apt install redis-server -y
+```
+- to start redis
+```
+sudo systemctl enable redis-server
+sudo systemctl start redis-server
+```
+
+### 6. Start the Server
 ```
 rails s
 ```
