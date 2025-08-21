@@ -18,7 +18,12 @@
         <%= f.file_field :avatar, accept:'image/*' %>
       </div>
 
-      <%= image_tag avatar_path(f.object), class: "rounded border shadow-sm d-block mx-auto my-3" %>
+      <% if f.object.avatar.attached? && f.object.avatar.blob&.persisted? %>
+        <%= image_tag f.object.avatar.variant(resize_to_fill: [150, 150]), class: "rounded border shadow-sm d-block mx-auto my-3" %>
+      <% else %>
+        <%= image_tag "placeholder-400x400.png", class: "rounded border shadow-sm d-block mx-auto my-3", alt: "No avatar" %>
+      <% end %>
+
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div class="alert alert-warning">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
