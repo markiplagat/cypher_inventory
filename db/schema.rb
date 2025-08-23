@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_24_175222) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_23_071102) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,28 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_24_175222) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "invoice_items", force: :cascade do |t|
+    t.bigint "invoice_id", null: false
+    t.string "description"
+    t.integer "quantity"
+    t.decimal "unit_price"
+    t.decimal "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.string "customer_name"
+    t.string "invoice_number"
+    t.decimal "total"
+    t.string "status"
+    t.date "due_date"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "noticed_events", force: :cascade do |t|
@@ -127,5 +149,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_24_175222) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "invoice_items", "invoices"
   add_foreign_key "services", "users"
 end
