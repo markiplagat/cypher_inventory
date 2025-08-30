@@ -1,38 +1,50 @@
-require "test_helper"
+require 'test_helper'
 
 class InvoicesControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get invoices_index_url
+  setup do
+    @invoice = invoices(:one)
+  end
+
+  test 'should get index' do
+    get invoices_url
     assert_response :success
   end
 
-  test "should get show" do
-    get invoices_show_url
+  test 'should get show' do
+    get invoices_url(@invoice)
     assert_response :success
   end
 
-  test "should get new" do
-    get invoices_new_url
+  test 'should get new' do
+    get new_invoice_url
     assert_response :success
   end
 
-  test "should get create" do
-    get invoices_create_url
+  test 'should create invoice' do
+    assert_difference('Invoice.count') do
+      post invoices_url, params: { invoice: { customer_name: @invoice.customer_name, invoice_number: @invoice.invoice_number,
+                                  total: @invoice.total, status: @invoice.status, due_date: @invoice.due_date } }
+    end
+
+    assert_redirected_to invoice_url(Invoice.last)
+  end
+
+  test 'should get edit' do
+    get edit_invoice_url(@invoice)
     assert_response :success
   end
 
-  test "should get edit" do
-    get invoices_edit_url
-    assert_response :success
+  test 'should get update' do
+    patch invoice_url(@invoice), params: { invoice: { customer_name: @invoice.customer_name, invoice_number: @invoice.invoice_number,
+                                  total: @invoice.total, status: @invoice.status, due_date: @invoice.due_date } }
+    assert_redirected_to invoice_url(@invoice)
   end
 
-  test "should get update" do
-    get invoices_update_url
-    assert_response :success
-  end
+  test 'should destroy invoice' do
+    assert_difference('Invoice.count', -1) do
+      delete invoice_url(@invoice)
+    end
 
-  test "should get destroy" do
-    get invoices_destroy_url
-    assert_response :success
+    assert_redirected_to invoices_url
   end
 end
