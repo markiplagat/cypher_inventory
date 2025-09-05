@@ -87,3 +87,5 @@ gem 'ransack'
 gem 'image_processing', '~> 1.2'
 gem 'rails_admin', '~> 3.0'
 gem "sass-rails", "~> 6"
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
